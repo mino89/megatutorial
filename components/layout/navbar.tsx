@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "../ui/button";
 import UserMenu from "./user-menu";
 
@@ -11,7 +12,13 @@ const Navbar = ({ isLoggedIn }: NavbarProps) => {
       <div className="flex max-w-7xl mx-auto p-8 items-center">
         <div className="flex-1">logo</div>
         <div>
-          {isLoggedIn ? <UserMenu /> : <Button variant="outline">login</Button>}
+          {isLoggedIn ? (
+            <UserMenu />
+          ) : (
+            <Button variant="outline" asChild>
+              <Link href="/login">login</Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>
