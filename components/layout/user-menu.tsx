@@ -1,3 +1,6 @@
+"use client";
+
+import { User } from "@supabase/supabase-js";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,15 +9,30 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
-const UserMenu = () => {
+interface UserMenuProps {
+  user: User;
+}
+
+const UserMenu = ({ user }: UserMenuProps) => {
+  const router = useRouter();
+  const supabaseClient = createClient();
+  const logout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (!error) {
+      router.refresh();
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>Open</DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Profile</DropdownMenuLabel>
+        <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

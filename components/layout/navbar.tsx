@@ -1,17 +1,36 @@
+import Link from "next/link";
 import { Button } from "../ui/button";
 import UserMenu from "./user-menu";
+import { User } from "@supabase/supabase-js";
 
 interface NavbarProps {
-  isLoggedIn: boolean;
+  user: User | null;
 }
 
-const Navbar = ({ isLoggedIn }: NavbarProps) => {
+const Navbar = ({ user }: NavbarProps) => {
   return (
     <div className="bg-white">
       <div className="flex max-w-7xl mx-auto p-8 items-center">
-        <div className="flex-1">logo</div>
+        <div className="flex-1">
+          <Link href="/">logo</Link>
+        </div>
+
         <div>
-          {isLoggedIn ? <UserMenu /> : <Button variant="outline">login</Button>}
+          {user ? (
+            <div className="flex gap-8 items-center">
+              <Link
+                href="/courses"
+                className="uppercase font-bold underline hover:no-underline"
+              >
+                Corsi
+              </Link>
+              <UserMenu user={user} />
+            </div>
+          ) : (
+            <Button variant="outline" asChild>
+              <Link href="/login">login</Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>
