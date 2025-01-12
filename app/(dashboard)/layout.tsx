@@ -12,10 +12,10 @@ export default async function DashboardLayout({
   const { data } = await supabaseClient.auth.getUser();
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar user={data.user} />
-      {children}
+      <div className="flex-1">{children}</div>
       <Footer />
-    </>
+    </div>
   );
 }
