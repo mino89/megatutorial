@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { FormState, registerAction } from "./actions";
+import { FormState, registerAction } from "../actions";
 import { useActionState } from "react";
 import FormButton from "@/components/ui/form-button";
 const initialState: FormState = {

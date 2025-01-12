@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import {
   Card,
   CardHeader,
@@ -11,7 +12,18 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-export const Login = () => {
+import { FormState, loginAction } from "../actions";
+import { useActionState } from "react";
+import FormButton from "@/components/ui/form-button";
+const initialState: FormState = {
+  message: "",
+};
+
+function Login() {
+  const [state, formAction, pending] = useActionState(
+    loginAction,
+    initialState
+  );
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
@@ -24,13 +36,14 @@ export const Login = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form>
+              <form action={formAction}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
+                      name="email"
                       placeholder="m@example.com"
                       required
                     />
@@ -39,11 +52,16 @@ export const Login = () => {
                     <div className="flex items-center">
                       <Label htmlFor="password">Password</Label>
                     </div>
-                    <Input id="password" type="password" required />
+                    <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                    />
                   </div>
-                  <Button type="submit" className="w-full">
-                    Login
-                  </Button>
+                  <FormButton pending={pending}>Login</FormButton>
+                  <div className="text-green-400">{state.message}</div>
+                  <div className="text-red-400">{state?.error}</div>
                 </div>
                 <div className="mt-4 text-center text-sm">
                   Don&apos;t have an account?{""}
@@ -61,6 +79,6 @@ export const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;
