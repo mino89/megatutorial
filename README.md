@@ -7,6 +7,7 @@ create `.env.local`
 ```
 NEXT_PUBLIC_SUPABASE_URL=your-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_VIDEO_PATH=your-streaming-service-path
 ```
 
 First, run the development server:
