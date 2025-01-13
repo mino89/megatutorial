@@ -1,3 +1,5 @@
+"use client";
+import { handleSubscribe } from "@/app/(dashboard)/action";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,7 +14,7 @@ import { Check } from "lucide-react";
 const pricingPlans = [
   {
     name: "Basic",
-    price: "$9",
+    price: "10,00 €",
     description: "Essential features for small teams",
     features: [
       "Up to 5 users",
@@ -21,37 +23,15 @@ const pricingPlans = [
       "Core features",
     ],
   },
-  {
-    name: "Pro",
-    price: "$29",
-    description: "Advanced features for growing businesses",
-    features: [
-      "Up to 20 users",
-      "50GB storage",
-      "Priority support",
-      "Advanced features",
-      "API access",
-    ],
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    description: "Tailored solutions for large organizations",
-    features: [
-      "Unlimited users",
-      "Unlimited storage",
-      "24/7 premium support",
-      "Custom integrations",
-      "Dedicated account manager",
-    ],
-  },
 ];
 
 const Pricing = () => {
+  const handlePurchase = async () =>
+    await handleSubscribe("price_1QgovJKGjui5RGGy5jaDVxNk");
   return (
     <div id="pricing" className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold text-center mb-12">Choose Your Plan</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid gap-8">
         {pricingPlans.map((plan, index) => (
           <Card
             key={index}
@@ -62,7 +42,7 @@ const Pricing = () => {
             <CardHeader>
               <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
               <CardDescription className="text-xl font-semibold">
-                {plan.price}/month
+                {plan.price}/year
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
@@ -82,6 +62,7 @@ const Pricing = () => {
               <Button
                 className="w-full"
                 variant={index === 1 ? "default" : "outline"}
+                onClick={handlePurchase}
               >
                 {index === 2 ? "Contact Sales" : "Get Started"}
               </Button>

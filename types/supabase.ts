@@ -54,6 +54,30 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          active: boolean
+          created_at: string
+          email: string
+          id: number
+          stripeid: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          email: string
+          id?: number
+          stripeid: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          email?: string
+          id?: number
+          stripeid?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
