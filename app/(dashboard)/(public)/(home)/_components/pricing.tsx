@@ -1,6 +1,5 @@
 "use client";
-import { handleSubscribe } from "@/app/(dashboard)/action";
-import { Button } from "@/components/ui/button";
+import PurchaseButton from "@/components/layout/purchase";
 import {
   Card,
   CardHeader,
@@ -26,8 +25,6 @@ const pricingPlans = [
 ];
 
 const Pricing = () => {
-  const handlePurchase = async () =>
-    await handleSubscribe("price_1QgovJKGjui5RGGy5jaDVxNk");
   return (
     <div id="pricing" className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold text-center mb-12">Choose Your Plan</h2>
@@ -59,13 +56,9 @@ const Pricing = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button
-                className="w-full"
-                variant={index === 1 ? "default" : "outline"}
-                onClick={handlePurchase}
-              >
-                {index === 2 ? "Contact Sales" : "Get Started"}
-              </Button>
+              <PurchaseButton
+                price_id={process.env.NEXT_PUBLIC_STRIPE_PRICE_ID || ""}
+              />
             </CardFooter>
           </Card>
         ))}

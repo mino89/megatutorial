@@ -1,5 +1,3 @@
-import { stripe } from "@/utils/stripe/stripe";
-
 export default async function ConfirmPage({
   searchParams,
 }: {
